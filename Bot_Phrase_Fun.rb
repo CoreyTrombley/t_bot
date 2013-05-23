@@ -3,7 +3,6 @@
 require 'rubygems'
 require 'chatterbot/dsl'
 require 'faker'
-require 'pry'
 
 # remove this to send out tweets
 # debug_mode
