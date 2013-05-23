@@ -69,6 +69,7 @@ GEM
     multi_json (1.7.3)
     multipart-post (1.2.0)
     oauth (0.4.7)
+    pg (0.15.1)
     polyglot (0.3.3)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
@@ -142,6 +143,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   faker
   jquery-rails
+  pg
   pry
   rails (= 3.2.13)
   sass-rails (~> 3.2.3)
