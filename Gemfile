@@ -1,5 +1,4 @@
 source 'https://rubygems.org'
-gemspec
 
 gem 'rails', '3.2.13'
 
@@ -10,6 +9,7 @@ gem 'sqlite3'
 gem "twitter_oauth"
 gem "faker"
 gem "pry"
+gem 'chatterbot'
 
 # Gems used only for assets and not required
 # in production environments by default.
