@@ -11,13 +11,13 @@ require 'faker'
 #
 # Set some date defaults for Sequel
 #
-Sequel.datetime_class = DateTime
-Sequel.default_timezone = :utc
+# Sequel.datetime_class = DateTime
+# Sequel.default_timezone = :utc
 
 #
 # grab a copy of the db handle
 #
-db = Sequel.connect('postgres://x:x@ec2-107-20-217-22.compute-1.amazonaws.com:5432/de395fd2kr3i38')
+#db = Sequel.connect('postgres://x:x@ec2-107-20-217-22.compute-1.amazonaws.com:5432/de395fd2kr3i38')
 
 
 # remove this to update the db
