@@ -11,7 +11,6 @@ require 'faker'
 # no_update
 
 # create a new client connection
-bot = Chatterbot::Bot.new(:consumer_key => "q4tCkWhYwpRMDb509AJzHA", :consumer_secret => "HZ4BFFhmVTkgUIxWSjvNa921n4MS3J0PTsZPH0fZfM", :oauth_token => "1433884764-o9PtsVgvUSMOqHwkBgQunTtRX9sLGRxxqMdQgcN", :oauth_token_secret => "gR8Q5quHUhBkKh8vvgp2VtRBfFXIKXrugroF1G2cqw")
 client = Twitter::Client.new(:consumer_key => "q4tCkWhYwpRMDb509AJzHA", :consumer_secret => "HZ4BFFhmVTkgUIxWSjvNa921n4MS3J0PTsZPH0fZfM", :oauth_token => "1433884764-o9PtsVgvUSMOqHwkBgQunTtRX9sLGRxxqMdQgcN", :oauth_token_secret => "gR8Q5quHUhBkKh8vvgp2VtRBfFXIKXrugroF1G2cqw")
 phrase = Faker::Company.catch_phrase
 # remove this to get less output when running
@@ -23,21 +22,40 @@ blacklist
 # here's a list of things to exclude from searches
 exclude "spammer", "junk", "http://"
 
-  users = []
-
-  tweet phrase
+  users = {}
+  user = ""
+  next_tweet_id = 0
+  highest_retweet = 0
 
   client.trends.each do |term|
     t = term.name
-    bot.search(t, :lang => "en") do |tweet|
-      users << tweet.user.screen_name
+    search(t, :lang => "en") do |tweet|
+      users[tweet.user.screen_name] = tweet.retweet_count
+      # puts tweet.id
+      # puts tweet.retweet_count
+      if highest_retweet < tweet.retweet_count
+        highest_retweet = tweet.retweet_count
+        next_tweet_id = tweet.id
+        user = tweet.user.screen_name
+      end
+      # puts ""
     end
   end
 
-  users.shuffle.first(3).each do |user|
-    client.follow(user)
-    puts "I followed @#{user}"
+  users.each_pair do |key, value|
+    if value == users.values.max
+      puts "the user is @#{key} and their tweet was retweeted #{value} times."
+    end
   end
+
+  client.follow(user)
+  retweet(next_tweet_id)
+  puts "I followed @#{user}"
+
+  # users.shuffle.first(3).each do |user|
+  #   client.follow(user)
+  #   puts "I followed @#{user}"
+  # end
 
   # explicitly update our config
   update_config
