@@ -33,9 +33,8 @@ exclude "spammer", "junk", "http://"
     end
   end
 
-  users.shuffle.first(15).each do |user|
+  users.shuffle.first(3).each do |user|
     client.follow(user)
-    puts "I followed ==|#{user}|=="
   end
 
   # explicitly update our config

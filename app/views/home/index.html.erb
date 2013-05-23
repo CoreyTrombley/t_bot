@@ -2,5 +2,25 @@
 
 <p>this is a simple bot that follows people and searches the top trending terms.</p>
 
+<div>
+  What I am searching:
+  <% @client.trends.each do |trend| %>
+    <%= link_to trend.name, trend.url %>
+  <% end %>
+</div>
 
-<%= @client.inspect %>
+<div>
+  <h4>Activity about me:</h4>
+  Following count:
+  <%= @client.friends.count %>
+  <br>
+  Followers count:
+  <%= @client.followers.users.count %>
+  <br>
+  Tweet Count:
+  <%= @client.user.statuses_count %>
+  <br>
+  <h5>Latest tweet:</h5>
+  <%= @client.user.status.text %>
+</div>
+
