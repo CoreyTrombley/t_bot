@@ -8,6 +8,7 @@ gem "twitter_oauth"
 gem "faker"
 gem 'chatterbot'
 gem 'thin'
+gem 'sequel'
 
 group :production do
   gem 'pg'
