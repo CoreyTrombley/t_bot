@@ -28,13 +28,14 @@ exclude "spammer", "junk", "http://"
 
   client.trends.each do |term|
     t = term.name
-    search t do |tweet|
+    search(t, :lang => "en") do |tweet|
       users << tweet.user.screen_name
     end
   end
 
   users.shuffle.first(3).each do |user|
     client.follow(user)
+    puts "I followed @#{user}"
   end
 
   # explicitly update our config
