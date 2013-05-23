@@ -11,6 +11,7 @@ require 'faker'
 # no_update
 
 # create a new client connection
+bot = Chatterbot::Bot.new(:consumer_key => "q4tCkWhYwpRMDb509AJzHA", :consumer_secret => "HZ4BFFhmVTkgUIxWSjvNa921n4MS3J0PTsZPH0fZfM", :oauth_token => "1433884764-o9PtsVgvUSMOqHwkBgQunTtRX9sLGRxxqMdQgcN", :oauth_token_secret => "gR8Q5quHUhBkKh8vvgp2VtRBfFXIKXrugroF1G2cqw")
 client = Twitter::Client.new(:consumer_key => "q4tCkWhYwpRMDb509AJzHA", :consumer_secret => "HZ4BFFhmVTkgUIxWSjvNa921n4MS3J0PTsZPH0fZfM", :oauth_token => "1433884764-o9PtsVgvUSMOqHwkBgQunTtRX9sLGRxxqMdQgcN", :oauth_token_secret => "gR8Q5quHUhBkKh8vvgp2VtRBfFXIKXrugroF1G2cqw")
 phrase = Faker::Company.catch_phrase
 # remove this to get less output when running
@@ -28,7 +29,7 @@ exclude "spammer", "junk", "http://"
 
   client.trends.each do |term|
     t = term.name
-    search(t, :lang => "en") do |tweet|
+    bot.search(t, :lang => "en") do |tweet|
       users << tweet.user.screen_name
     end
   end

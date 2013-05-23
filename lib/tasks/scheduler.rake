@@ -1,4 +1,4 @@
-desc "This task is called by the Heroku scheduler add-on"
+desc "This searches twitters top trending terms"
 
 
 task :search_trends => :environment do
