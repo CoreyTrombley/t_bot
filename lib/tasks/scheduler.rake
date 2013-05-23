@@ -1,53 +1,12 @@
 desc "This task is called by the Heroku scheduler add-on"
 
-require 'rubygems'
-require 'chatterbot/dsl'
-require 'faker'
-require 'pry'
-
 
 task :search_trends => :environment do
   puts "Searching Trends"
-  
-  # remove this to send out tweets
-  # debug_mode
 
-  # remove this to update the db
-  # no_update
-
-  # create a new client connection
-  client = Twitter::Client.new(:consumer_key => "q4tCkWhYwpRMDb509AJzHA", :consumer_secret => "HZ4BFFhmVTkgUIxWSjvNa921n4MS3J0PTsZPH0fZfM", :oauth_token => "1433884764-o9PtsVgvUSMOqHwkBgQunTtRX9sLGRxxqMdQgcN", :oauth_token_secret => "gR8Q5quHUhBkKh8vvgp2VtRBfFXIKXrugroF1G2cqw")
-  phrase = Faker::Company.catch_phrase
-  # remove this to get less output when running
-  # verbose
-
-  # here's a list of users to ignore
-  blacklist 
-
-  # here's a list of things to exclude from searches
-  exclude "spammer", "junk", "http://"
-
-  users = []
-
-  tweet phrase
-
-  client.trends.each do |term|
-    t = term.name
-    search t do |tweet|
-      users << tweet.user.screen_name
-    end
-  end
-
-  users.shuffle.first(15).each do |user|
-    #client.follow(user)
-    puts "I followed ==|#{user}|=="
-  end
-
-  # explicitly update our config
-  update_config
-
-
-
+  file = File.join(Rails.root, 'Bot_Phrase_Fun.rb')
+  puts "Runnng #{file}"
+  load(file) if File.exist?(file)
 
   puts "done."
 end
