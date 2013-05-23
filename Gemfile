@@ -7,6 +7,7 @@ gem 'rails', '3.2.13'
 gem "twitter_oauth"
 gem "faker"
 gem 'chatterbot'
+gem 'thin'
 
 group :development do
   gem 'sqlite3'
