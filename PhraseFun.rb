@@ -34,6 +34,7 @@ blacklist
 
 # here's a list of things to exclude from searches
 exclude "spammer", "junk", "http://"
+loop do
 
   users = {}
   user = ""
@@ -61,10 +62,14 @@ exclude "spammer", "junk", "http://"
     end
   end
 
-  client.follow(user)
-  retweet(next_tweet_id)
-  puts "I followed @#{user}"
-
+  if highest_retweet != 0
+    client.follow(user)
+    retweet(next_tweet_id)
+    puts "I followed @#{user}"
+  else
+    tweet "No note worthy tweets to retweet. Sorry..."
+    puts "No note worthy tweets"
+  end
   # users.shuffle.first(3).each do |user|
   #   client.follow(user)
   #   puts "I followed @#{user}"
@@ -73,6 +78,7 @@ exclude "spammer", "junk", "http://"
   # explicitly update our config
   update_config
   
-  # sleep 920 # 12hours = 43200 1hour = 3600
+  sleep 180 # 12hours = 43200 1hour = 3600
 
+end
 
